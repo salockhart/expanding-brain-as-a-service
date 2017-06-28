@@ -77,6 +77,10 @@ app.post('/slack', (req, res) => {
     });
   }
 
+  req.body.text = req.body.text.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
+
+  console.log('requesting', req.body.text);
+
   const [first, second, third, fourth] = req.body.text.split('"').filter(entry => !!entry.trim());
 
   return res.send({
