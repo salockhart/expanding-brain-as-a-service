@@ -44,7 +44,7 @@ An image
 
 **Response**
 
-![Expanding Brain](https://expanding-brain-as-a-service.herokuapp.com/brain?first=who&second=whom&third=whom%27st&fourth=whom%27st%27d)
+![Expanding Brain](docs/img/example.jpg)
 
 <!--# Slack
 
