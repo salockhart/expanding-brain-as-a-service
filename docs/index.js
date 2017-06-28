@@ -3,68 +3,31 @@
 let typingTimer;
 const doneTypingInterval = 500;
 
-const emojis = [
-    '👏',
-    '💪',
-    '👌',
-    '👍',
-    '💩',
-    '🌸',
-    '🦆',
-    '🍝',
-    '🔫',
-    '🦀',
-    '💯',
-    '💰',
-    '🚽',
-    '🐴',
-    '🕳️',
-    '❤️',
-    '🆒',
-    '😂',
-    '💀',
-    '🍆',
-    '😎',
-    '🖕',
-    '🇨🇦',
-    '+'
-];
-
-let selectedEmoji = emojis[0];
-
 function onKeyUp() {
     clearTimeout(typingTimer);
-    typingTimer = setTimeout(submitPhrase, doneTypingInterval);
+    typingTimer = setTimeout(submitMeme, doneTypingInterval);
 }
 
 function onKeyDown() {
     clearTimeout(typingTimer);
 }
 
-function submitPhrase() {
-    const value = $('#phrase').val();
-    let emoji = $('#custom-emoji').val();
+function submitMeme() {
+    const first = $('#first').val();
+    const second = $('#second').val();
+    const third = $('#third').val();
+    const fourth = $('#fourth').val();
 
-    if (!value) {
+    if (!first || !second || !third || !fourth) {
         return;
     }
 
-    if (!emoji) {
-        emoji = selectedEmoji;
-    }
+    const encodedFirst = encodeURIComponent(first);
+    const encodedSecond = encodeURIComponent(second);
+    const encodedThird = encodeURIComponent(third);
+    const encodedFourth = encodeURIComponent(fourth);
 
-    const encodedPhrase = encodeURIComponent(value);
-    const encodedEmoji = encodeURIComponent(emoji);
-
-    $.get('https://expanding-brain-as-a-service.herokuapp.com/brain?first=' + encodedPhrase + '&second=' + encodedEmoji + '&third=' + '&fourth=')
-        .done(function (event) {
-            $('#clap').html(event);
-            if (!event) {
-                $('#share-container').addClass('invisible');
-            } else {
-                $('#share-container').removeClass('invisible');
-            }
-        });
+    $('#image').attr('src', 'https://expanding-brain-as-a-service.herokuapp.com/brain?first=' + encodedFirst + '&second=' + encodedSecond + '&third=' + encodedThird + '&fourth=' + encodedFourth);
 }
 
 function handleUrlParams() {
@@ -73,87 +36,42 @@ function handleUrlParams() {
         return results && results[1];
     }
 
-    const urlPhrase = urlParam('phrase');
-    let urlEmoji = urlParam('emoji');
+    const urlFirst = urlParam('first');
+    const urlSecond = urlParam('second');
+    const urlThird = urlParam('third');
+    const urlFourth = urlParam('fourth');
 
-    if (urlEmoji) {
-        urlEmoji = decodeURIComponent(urlEmoji);
-        const idx = emojis.indexOf(urlEmoji);
-        if (idx !== -1) {
-            onEmojiSelect({
-                target: $('#sample-emoji-container button')[idx]
-            })
-        } else {
-            onOpenCustomEmoji();
-            $('#custom-emoji').val(urlEmoji);
-        }
+    if (urlFirst) {
+        $('#first').val(decodeURIComponent(urlFirst));
     }
 
-    if (urlPhrase) {
-        $('#phrase').val(decodeURIComponent(urlPhrase));
+    if (urlSecond) {
+        $('#second').val(decodeURIComponent(urlSecond));
     }
 
-    submitPhrase();
-}
-
-function fillEmojiSelector() {
-    const emojiContainer = $('#sample-emoji-container');
-    for (let i = 0; i < emojis.length; i++) {
-        const button = $('<button>')
-        if (i === 0) {
-            button.addClass('active');
-        }
-        button.addClass('btn');
-        button.addClass('btn-default');
-        button.addClass('col-xs-2');
-        button.addClass('col-sm-1');
-        button.text(emojis[i]);
-        button.click(onEmojiSelect);
-        emojiContainer.append(button);
+    if (urlThird) {
+        $('#third').val(decodeURIComponent(urlThird));
     }
-}
 
-function onEmojiSelect(event) {
-    const target = $(event.target);
-    if (target.text() === '+') {
-        onOpenCustomEmoji();
-    } else {
-        selectedEmoji = target.text();
-        submitPhrase();
-        const currentActive = $('.active');
-        currentActive.removeClass('active');
-        target.addClass('active');
+    if (urlFourth) {
+        $('#fourth').val(decodeURIComponent(urlFourth));
     }
-}
 
-function onOpenCustomEmoji() {
-    $('#sample-emoji-container').addClass('invisible');
-    $('#custom-emoji-container').removeClass('invisible');
-    const emojiInput = $('#custom-emoji');
-    emojiInput.val('');
-    emojiInput.focus();
-}
-
-function onCloseCustomEmoji() {
-    $('#sample-emoji-container').removeClass('invisible');
-    $('#custom-emoji-container').addClass('invisible');
-    const emojiInput = $('#custom-emoji');
-    emojiInput.val('');
+    submitMeme();
 }
 
 function getURLForResult() {
-    const value = $('#phrase').val();
-    let emoji = $('#custom-emoji').val();
+    const first = $('#first').val();
+    const second = $('#second').val();
+    const third = $('#third').val();
+    const fourth = $('#fourth').val();
 
-    if (!value) {
-        return;
-    }
+    const encodedFirst = encodeURIComponent(first);
+    const encodedSecond = encodeURIComponent(second);
+    const encodedThird = encodeURIComponent(third);
+    const encodedFourth = encodeURIComponent(fourth);
 
-    if (!emoji) {
-        emoji = selectedEmoji;
-    }
-
-    return window.location.origin + window.location.pathname + '?phrase=' + encodeURIComponent(value) + '&emoji=' + encodeURIComponent(emoji);
+    return window.location.origin + window.location.pathname + '?first=' + encodedFirst + '&second=' + encodedSecond + '&third=' + encodedThird + '&fourth=' + encodedFourth;
 }
 
 function onShareTwitter() {
@@ -162,37 +80,12 @@ function onShareTwitter() {
     window.open(baseURL + "?text=" + encodeURIComponent(clapResult) + "&url=" + encodeURIComponent(getURLForResult()));
 }
 
-function onShareCopy() {
-    const value = $('#clap');
-    value.setSelectionRange(0, value.text().length);
-
-    // copy the selection
-    let succeed;
-    try {
-        succeed = document.execCommand("copy");
-    } catch (e) {
-        succeed = false;
-    }
-
-    if (succeed) {
-        console.log("Success");
-    }
-}
-
 $(function () {
-    fillEmojiSelector();
     handleUrlParams();
 
-    const phraseInput = $('#phrase');
-    phraseInput.keyup(onKeyUp);
-    phraseInput.keydown(onKeyDown);
-
-    const emojiInput = $('#custom-emoji');
-    emojiInput.keyup(onKeyUp);
-    emojiInput.keydown(onKeyDown);
-
-    $('#custom-emoji-close').click(onCloseCustomEmoji);
+    const brainInputs = $('.brain-input');
+    brainInputs.keyup(onKeyUp);
+    brainInputs.keydown(onKeyDown);
 
     $('#share-container .twitter-button').click(onShareTwitter);
-    $('#share-container .copy-button').click(onShareCopy);
 });

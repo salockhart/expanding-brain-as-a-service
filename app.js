@@ -1,8 +1,4 @@
-const Jimp = require("jimp");
-
-const inputFileName = 'input.jpg';
-const outputFileName = 'output.jpg';
-
+const Jimp = require('jimp');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -29,7 +25,7 @@ app.use(express.static(path.join(__dirname, '/docs')));
 
 function brainImage(first, second, third, fourth) {
   return Promise.all([
-    Jimp.read(inputFileName),
+    Jimp.read('input.jpg'),
     Jimp.loadFont(Jimp.FONT_SANS_16_BLACK),
   ]).then((data) => {
     const [loadedImage, font] = data;
