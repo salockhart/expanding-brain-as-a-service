@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Clap (As A Service)</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div id="success-banner" class="banner hidden">
+        <p>Clap (As A Service) has been successfully installed!</p>
+    </div>
+
+    <div id="error-banner" class="banner hidden">
+        <p>Something has gone wrong.</p>
+    </div>
+
+    <div class="jumbotron text-center">
+        <h1>Clap (As A Service) (For Slack)</h1>
+    </div>
+
+    <div class="container">
+        <nav>
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#">Install</a></li>
+                <li><a href="../privacy">Privacy</a></li>
+                <li><a href="../help">Support</a></li>
+            </ul>
+        </nav>
+        <div id="slack-button-wrapper">
+            <a href="https://slack.com/oauth/authorize?&client_id=11167364134.165634777125&scope=commands"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
+                /></a>
+        </div>
+        <div id="description">
+            <p>Add Clap (As A Service) to Slack to add a single command that will clap any input you give it.</p>
+            <p>Supports regular ol' claps as well as specifying your own emoji.</p>
+        </div>
+        <div id="gif-wrapper">
+            <img src="img/clap-demo.gif" alt="clap as a service demo gif">
+        </div>
+        <div id="examples">
+            <h2>Examples</h2>
+            <p><strong>Command</strong></p>
+            <pre><code>/clap welcome to clap as a service</code></pre>
+            <p><strong>Response</strong></p>
+            <pre><code>welcome 👏 to 👏 clap 👏 as 👏 a 👏 service</code></pre>
+            <p><strong>Command</strong></p>
+            <pre><code>/clap palms sweaty mom's spaghetti 🍝np</code></pre>
+            <p><strong>Response</strong></p>
+            <pre><code>palms 🍝 sweaty 🍝 mom's 🍝 spaghetti</code></pre>
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+.banner {
+    position: absolute;
+    width: 100vw;
+}
+
+.banner p {
+    color: white;
+    margin: 10px;
+    font-size: 20px;
+}
+
+#success-banner {
+    background-color: #5cb85c;
+    border: 1px solid #4cae4c;
+}
+
+#error-banner {
+    background-color: #d9534f;
+    border-color: #d43f3a
+}
+
+#slack-button-wrapper {
+    margin: 20px auto;
+    width: 139px;
+}
+
+#gif-wrapper {
+    margin: 20px auto;
+    width: calc(100vw - 30px);
+}
+
+#gif-wrapper img {
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    #gif-wrapper {
+        width: 688px;
+    }
+
+    #description,
+    #examples {
+        margin: 0 50px;
+    }
+}
