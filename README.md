@@ -46,30 +46,20 @@ An image
 
 ![Expanding Brain](docs/img/example.jpg)
 
-<!--# Slack
+# Slack
 
-Add Clap (As A Service) to Slack to add a single command that will clap any input you give it.
+Add Expanding Brain (As A Service) to Slack to add a single command that will immediately bring you to a new level of being.
 
-Supports regular ol' claps as well as specifying your own emoji.
+<a href="https://slack.com/oauth/authorize?&client_id=11167364134.205968072726&scope=commands"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
 
-<a href="https://slack.com/oauth/authorize?&client_id=11167364134.165634777125&scope=commands"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
-
-[See it in the App Directory](https://slack.com/apps/A4VJNNV3P-clap-as-a-service)
+<!--[See it in the App Directory](https://slack.com/apps/A4VJNNV3P-clap-as-a-service)-->
 
 ## Examples
 
 **Command**
 
-    /clap welcome to clap as a service
+    /brain "who" "whom" "whom’st" "whom’st’d"
 
 **Response**
 
-    welcome 👏 to 👏 clap 👏 as 👏 a 👏 service
-
-**Command**
-
-    /clap palms sweaty mom's spaghetti 🍝
-
-**Response**
-
-    palms 🍝 sweaty 🍝 mom's 🍝 spaghetti-->
+![Expanding Brain](docs/img/example.jpg)
