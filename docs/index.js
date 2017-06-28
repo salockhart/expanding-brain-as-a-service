@@ -56,7 +56,7 @@ function submitPhrase() {
     const encodedPhrase = encodeURIComponent(value);
     const encodedEmoji = encodeURIComponent(emoji);
 
-    $.get('https://clap-as-a-service.herokuapp.com/clap?phrase=' + encodedPhrase + '&emoji=' + encodedEmoji)
+    $.get('https://expanding-brain-as-a-service.herokuapp.com/brain?first=' + encodedPhrase + '&second=' + encodedEmoji + '&third=' + '&fourth=')
         .done(function (event) {
             $('#clap').html(event);
             if (!event) {
