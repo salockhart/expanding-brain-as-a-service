@@ -31,10 +31,10 @@ function brainImage(first, second, third, fourth) {
     const [loadedImage, font] = data;
     return new Promise((resolve, reject) => {
       loadedImage
-        .print(font, 10, (157.25 * 0) + 10, first)
-        .print(font, 10, (157.25 * 1) + 10, second)
-        .print(font, 10, (157.25 * 2) + 10, third)
-        .print(font, 10, (157.25 * 3) + 10, fourth)
+        .print(font, 10, (157.25 * 0) + 10, first, 200)
+        .print(font, 10, (157.25 * 1) + 10, second, 200)
+        .print(font, 10, (157.25 * 2) + 10, third, 200)
+        .print(font, 10, (157.25 * 3) + 10, fourth, 200)
         .getBuffer(Jimp.AUTO, (err, buffer) => {
           if (err) {
             return reject(err);
@@ -48,12 +48,17 @@ function brainImage(first, second, third, fourth) {
 }
 
 app.get('/brain', (req, res) => {
-  const {
+  let {
     first,
     second,
     third,
     fourth,
   } = req.query;
+
+  first = decodeURIComponent(first);
+  second = decodeURIComponent(second);
+  third = decodeURIComponent(third);
+  fourth = decodeURIComponent(fourth);
 
   return brainImage(first, second, third, fourth)
     .then((imageBuffer) => {
@@ -77,11 +82,16 @@ app.post('/slack', (req, res) => {
     });
   }
 
-  req.body.text = req.body.text.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
+  req.body.text = req.body.text
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/'/g, '%27');
 
   console.log('requesting', req.body.text);
 
-  const [first, second, third, fourth] = req.body.text.split('"').filter(entry => !!entry.trim());
+  const [first, second, third, fourth] = req.body.text.split('"')
+    .filter(entry => !!entry.trim())
+    .map(entry => encodeURIComponent(entry));
 
   return res.send({
     response_type: 'in_channel',
