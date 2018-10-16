@@ -2,6 +2,6 @@
 
 $(function () {
     $('#email .btn').click(function () {
-        window.open('mailto:expanding.brain.as.a.service@gmail.com', '_self');
+        window.open('mailto:brain@alexlockhart.ca', '_self');
     });
 });
